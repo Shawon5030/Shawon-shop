@@ -10,4 +10,15 @@ class ProductAdmin(admin.ModelAdmin):
         fields.remove('description')
         return fields
 admin.site.register(banner)
+
+
+@admin.register(Cart_model)
+
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['user' , 'products','quantity']
+
+
+
+
+
         

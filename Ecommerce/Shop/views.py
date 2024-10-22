@@ -2,7 +2,85 @@ from django.shortcuts import render
 from .models import product_model , banner
 
 
-from django.utils.text import slugify
+
+
+def plus_cart(request):
+  id = request.GET.get('prod_id')
+  print(id)
+  
+  product_id = Cart_model.objects.get(Q(products=id) & Q(user=request.user))
+  if product_id is not None:
+     product_id.quantity += 1
+     product_id.save()
+
+     if request.user.is_authenticated:
+          p = [p for p in Cart_model.objects.all() if p.user == request.user]
+          
+          amount = 0
+          for p in p:
+               amount += p.products.decounted_price * p.quantity
+
+          total_amount = amount + 100
+          data = {
+            
+            'amount': amount,
+            'totalamount': total_amount,
+            'quantity': p.quantity
+          }
+          return JsonResponse(data)
+def minus_cart(request):
+  id = request.GET.get('prod_id')
+  print(id)
+
+  
+  product_id = Cart_model.objects.get(Q(products=id) and Q(user=request.user))
+  if product_id is not None:
+     product_id.quantity =product_id.quantity- 1
+     product_id.save()
+     print("Product")
+
+     if request.user.is_authenticated:
+          p = [p for p in Cart_model.objects.all() if p.user == request.user]
+          
+          amount = 0
+          for p in p:
+               amount += p.products.decounted_price * p.quantity
+
+          total_amount = amount + 100
+          data = {
+            
+            'amount': amount,
+            'totalamount': total_amount,
+            'quantity': p.quantity
+          }
+          return JsonResponse(data)
+def remove_cart(request):
+     id = request.GET.get('prod_id')
+     print(id)
+
+     
+     product_id = Cart_model.objects.get(Q(products=id) and Q(user=request.user))
+     print(product_id)
+     
+          
+     product_id.delete()
+
+
+     p = [p for p in Cart_model.objects.all() if p.user == request.user]
+
+     amount = 0
+     for p in p:
+          amount += p.products.decounted_price * p.quantity
+
+     total_amount = amount + 100
+     data = {
+          
+          'amount': amount,
+          'totalamount': total_amount,
+          
+     }
+     return JsonResponse(data)
+          
 
 
 # Create your views here.
@@ -22,11 +100,6 @@ def lehenga(request):
 def shop_show(request, i):
   product = product_model.objects.filter(category=i)
   print(product)
-  
-        # add logic to add this product to the cart here if user clicks on add to cart button.
-       
-    
-  
   all_products = product_model.objects.all()
   categories = set(product.category for product in all_products) 
   return render(request, 'Shop/lehenga.html', {'categories': categories , 'product':product })
@@ -35,10 +108,45 @@ def shop_show(request, i):
 
 
 def product_detail(request , id , a):
- return render(request, 'Shop/productdetail.html')
+ product = product_model.objects.get(id=id)
+ 
+ return render(request, 'Shop/productdetail.html' , {'product': product})
+
+
+from .models import *
+
+from django.http import HttpResponseRedirect
+from  django.shortcuts import redirect
 
 def add_to_cart(request):
- return render(request, 'Shop/addtocart.html')
+ product_id = request.GET.get('product_id')
+ print(product_id)
+ product_id = product_model.objects.get(id=product_id)
+ print(product_id)
+ Cart_model(products=product_id , user=request.user).save()
+ return  redirect('show-cart')
+
+def show_cart(request):
+  cart = Cart_model.objects.filter(user=request.user)
+  if request.user.is_authenticated:
+    p = [p for p in Cart_model.objects.all() if p.user == request.user]
+    print(p)
+    amount = 0
+    for p in p:
+      amount += p.products.decounted_price * p.products.quantity
+
+    total_amount = amount + 100
+    print(total_amount, amount)
+  return render(request, 'Shop/addtocart.html', {'cart': cart , 'amount': amount, 'total_amount': total_amount})
+
+from django.db.models import Q
+from django.http import JsonResponse
+
+
+
+
+  
+
 
 def buy_now(request):
  return render(request, 'Shop/buynow.html')

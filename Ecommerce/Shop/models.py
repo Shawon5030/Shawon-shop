@@ -1,6 +1,5 @@
 from django.db import models
-from django.utils.text import slugify
-
+from django.contrib.auth.models import User
 # Create your models here.
 catagory_choice = [
     ('baby fashion' , 'baby fashion'),
@@ -24,6 +23,8 @@ class product_model(models.Model):
     
     category = models.CharField(max_length=20 , choices=catagory_choice)
 
+    def __str__(self):
+        return str(self.id)
 
 class banner(models.Model):
     name = models.CharField(max_length=30 , null=True, blank=True)
@@ -31,3 +32,17 @@ class banner(models.Model):
 
     def __str__(self):
         return self.name 
+    
+
+class Cart_model(models.Model):
+    quantity = models.IntegerField(null=True, blank=True , default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    products = models.ForeignKey(product_model, on_delete=models.CASCADE)
+
+
+    
+
+ 
+
+
+   
