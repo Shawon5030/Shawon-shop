@@ -1,0 +1,134 @@
+.main_content{
+    display: flex;
+    flex-direction: column;
+}
+
+.data ul{
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px solid;
+    margin: 2rem 2rem;
+   
+    padding: 1rem;
+    list-style-type: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    
+    
+    
+
+}
+.data ul{
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px solid #ddd;
+    margin: 2rem 1rem;
+    
+    
+    padding: 1rem;
+    list-style-type: none;
+    
+    
+
+}
+.data ul a{
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    
+    
+
+}
+.data-image{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+   
+}
+
+.data-image img{
+
+    height: 70%;
+    width: 80%;
+
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+    margin-left: .5rem;
+    margin-top: 1rem;
+}
+
+.style_image{
+    border: 1px solid #ddd;
+    width: 80%;
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 1rem;
+    
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.style_image a{
+    text-decoration: none;
+    display: inline-block;
+
+    
+}
+.style_image a p{
+    font-size: medium;
+    color: rgb(22, 22, 22);
+    text-align: center;
+    margin-top: .5rem;
+    margin-bottom: -.001rem;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+.style_image h3{
+    background: rgb(248, 8, 8);
+    color:#fffefe;
+    padding: .2rem 0;
+    width: 90%;
+    margin: auto;
+    font-size: 18px;
+    border-radius: 5px;
+    
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; */
+}
+.style_image h3:hover{
+    background: transparent;
+    color: black;
+    margin-bottom: -.001rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    
+}
+
+.home-css-product{
+    background-color: red;
+    
+}
+
+/* home page heading  */
+.home-h1{
+    text-align: center;
+    margin: 1rem 0;
+    background: violet;
+    padding: .5rem 0;
+    color: whitesmoke;
+}
+
+
+@media screen and (max-width:500px) {
+    .data-image{
+        display: grid;
+        grid-template-columns: 1fr ;
+    }
+
+    
+}

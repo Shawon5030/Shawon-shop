@@ -1,0 +1,46 @@
+{% extends 'Shop/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+
+<div class="main_content">
+    <div class="data">
+        <ul>
+            
+            {% for i in categories%}
+            <li> <a class="ajax" href="{%url 'shop_show' i.id i.price%}">{{i|capfirst}}</a></li>
+            {%endfor%}
+            
+        </ul>
+    </div>
+
+    <div class="data-image">
+            {% for i in product%}
+            <div class="style_image">
+                
+
+                <a href="">
+                    
+                        <img src="{{i.image.url}}">
+                        <p class="product_title">Man shart </p>
+                        <h3 class="product-price"> <span>Price </span>: 2000 Tk</h3>
+                    
+                </a>
+            </div>
+            {%endfor%}
+            
+            
+        <div>
+
+        
+        </div>
+
+    
+        
+
+
+    </div>
+
+</div>
+
+{% endblock main-content %}
